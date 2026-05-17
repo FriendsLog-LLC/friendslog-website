@@ -8,82 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #0e0e0f;
-      --bg2:       #151516;
-      --bg3:       #1c1c1e;
-      --burn:      #FF5722;
-      --burn-lt:   #FF8C42;
-      --white:     #ffffff;
-      --muted:     #888888;
-      --faint:     #2a2a2c;
-      --font-head: 'Barlow Condensed', sans-serif;
-      --font-body: 'Barlow', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { line-height: 1.7; }
 
     /* ── NAV ── */
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 48px;
       background: rgba(14,14,15,0.96);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--faint);
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo svg {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-    }
-
-    .nav-logo-text {
-      font-family: var(--font-head);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--white);
-    }
-
-    .nav-logo-text span { color: var(--burn); }
-
-    nav a.nav-link {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    nav a.nav-link:hover { color: var(--white); }
 
     /* ── LAYOUT ── */
     .page-wrap {
@@ -106,6 +42,7 @@
       margin-bottom: 20px;
     }
 
+    .doc-eyebrow img,
     .doc-eyebrow svg {
       width: 28px;
       height: 28px;
@@ -223,7 +160,7 @@
       margin-bottom: 20px;
     }
 
-    .doc-section p {
+    .doc-section > p {
       font-size: 16px;
       font-weight: 300;
       color: rgba(255,255,255,0.75);
@@ -321,8 +258,8 @@
     }
 
     .info-box p {
-      font-size: 14px !important;
-      margin-bottom: 0 !important;
+      font-size: 14px;
+      margin-bottom: 0;
     }
 
     .info-box a {
@@ -343,7 +280,6 @@
 
     .party-row {
       display: flex;
-      gap: 0;
       border-bottom: 1px solid var(--faint);
     }
 
@@ -411,7 +347,7 @@
     .contact-box .subtitle {
       font-size: 13px;
       color: var(--muted);
-      margin-bottom: 20px !important;
+      margin-bottom: 20px;
     }
 
     .contact-box .email-link {
@@ -430,46 +366,11 @@
     .contact-box .response-note {
       font-size: 13px;
       color: var(--muted);
-      margin-top: 16px !important;
-      margin-bottom: 0 !important;
+      margin-top: 16px;
+      margin-bottom: 0;
     }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--faint);
-      padding: 40px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-left {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .footer-left strong {
-      color: rgba(255,255,255,0.4);
-      font-weight: 400;
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-right a {
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-right a:hover { color: var(--white); }
-
+    /* ── MOBILE ── */
     @media (max-width: 640px) {
       nav { padding: 16px 20px; }
       .page-wrap { padding: 48px 20px 80px; }
@@ -484,27 +385,7 @@
 
   <nav>
     <a class="nav-logo" href="index.html">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-        <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111111"/>
-        <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
-        <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
-        <defs><clipPath id="n2-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
-        <g clip-path="url(#n2-face)">
-          <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
-          <path d="M172 852 C228 672 180 556 296 470 C340 534 364 510 408 446 C444 510 456 470 480 390 C504 470 516 510 552 446 C596 510 620 534 664 470 C780 556 732 672 788 852Z" fill="#BF2E00"/>
-          <path d="M336 852 C368 744 356 660 408 616 C428 664 444 644 480 608 C516 644 532 664 552 616 C604 660 592 744 624 852Z" fill="#FF9A5C"/>
-          <path d="M440 852 C452 784 448 740 480 706 C512 740 508 784 520 852Z" fill="#FFF0C0" opacity="0.9"/>
-        </g>
-        <rect x="476" y="96" width="96" height="44" rx="14" fill="#2A2A2C"/>
-        <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
-        <line x1="512" y1="114" x2="512" y2="158" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-        <line x1="910" y1="512" x2="866" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-        <line x1="114" y1="512" x2="158" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-        <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
-        <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
-        <circle cx="512" cy="512" r="40" fill="#FF5722"/>
-        <circle cx="512" cy="512" r="20" fill="white"/>
-      </svg>
+      <img src="icon.svg" width="32" height="32" alt="BurnClock icon">
       <span class="nav-logo-text"><span>Burn</span>Clock</span>
     </a>
     <a class="nav-link" href="index.html">← Back to App</a>
@@ -515,22 +396,7 @@
     <!-- HEADER -->
     <header class="doc-header">
       <div class="doc-eyebrow">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-          <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111"/>
-          <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
-          <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
-          <defs><clipPath id="h2-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
-          <g clip-path="url(#h2-face)">
-            <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
-            <path d="M172 852 C228 672 180 556 296 470 C340 534 364 510 408 446 C444 510 456 470 480 390 C504 470 516 510 552 446 C596 510 620 534 664 470 C780 556 732 672 788 852Z" fill="#BF2E00"/>
-            <path d="M336 852 C368 744 356 660 408 616 C428 664 444 644 480 608 C516 644 532 664 552 616 C604 660 592 744 624 852Z" fill="#FF9A5C"/>
-          </g>
-          <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
-          <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
-          <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
-          <circle cx="512" cy="512" r="40" fill="#FF5722"/>
-          <circle cx="512" cy="512" r="20" fill="white"/>
-        </svg>
+        <img src="icon.svg" width="28" height="28" alt="BurnClock icon">
         <span>BurnClock</span>
       </div>
 
