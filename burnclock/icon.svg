@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>BurnClock App Icon</title>
+  <desc>BurnClock app icon — dark rounded square with fire stopwatch</desc>
+
+  <defs>
+    <clipPath id="iconFace">
+      <circle cx="512" cy="512" r="340"/>
+    </clipPath>
+    <clipPath id="iconRound">
+      <rect x="0" y="0" width="1024" height="1024" rx="224"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111111"/>
+
+  <!-- Outer bezel ring -->
+  <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
+  <circle cx="512" cy="512" r="378" fill="none" stroke="#FF8C42" stroke-width="4" opacity="0.3"/>
+
+  <!-- Fire layers -->
+  <g clip-path="url(#iconFace)">
+    <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
+    <path d="M 204 852 C 260 672 212 556 328 470 C 372 534 396 510 440 446 C 476 510 488 470 512 390 C 536 470 548 510 584 446 C 628 510 652 534 696 470 C 812 556 764 672 820 852 Z" fill="#BF2E00"/>
+    <path d="M 252 852 C 304 700 260 584 356 516 C 392 578 412 554 456 498 C 484 556 496 520 512 462 C 528 520 540 556 568 498 C 612 554 632 578 668 516 C 764 584 720 700 772 852 Z" fill="#E04418"/>
+    <path d="M 312 852 C 356 724 336 620 400 568 C 428 624 444 600 480 562 C 492 606 500 584 512 548 C 524 584 532 606 544 562 C 580 600 596 624 624 568 C 688 620 668 724 712 852 Z" fill="#FF6030"/>
+    <path d="M 368 852 C 400 744 388 660 440 616 C 460 664 476 644 512 608 C 548 644 564 664 584 616 C 636 660 624 744 656 852 Z" fill="#FF9A5C"/>
+    <path d="M 424 852 C 444 764 436 700 476 660 C 488 700 496 678 512 646 C 528 678 536 700 548 660 C 588 700 580 764 600 852 Z" fill="#FFD166"/>
+    <path d="M 472 852 C 484 784 480 740 512 706 C 544 740 540 784 552 852 Z" fill="#FFF0C0" opacity="0.9"/>
+  </g>
+
+  <!-- Crown -->
+  <rect x="476" y="96" width="96" height="44" rx="14" fill="#2A2A2C"/>
+  <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
+
+  <!-- Hour markers -->
+  <line x1="512" y1="114" x2="512" y2="158" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <line x1="910" y1="512" x2="866" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <line x1="512" y1="910" x2="512" y2="866" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <line x1="114" y1="512" x2="158" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Minor ticks -->
+  <line x1="796" y1="196" x2="766" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="880" y1="336" x2="848" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="880" y1="688" x2="848" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="228" y1="196" x2="258" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="144" y1="336" x2="176" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="144" y1="688" x2="176" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- Hands -->
+  <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="512" cy="512" r="40" fill="#FF5722"/>
+  <circle cx="512" cy="512" r="20" fill="white"/>
+</svg>

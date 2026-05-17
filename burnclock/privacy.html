@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — BurnClock</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0e0e0f;
+      --bg2:       #151516;
+      --bg3:       #1c1c1e;
+      --burn:      #FF5722;
+      --burn-lt:   #FF8C42;
+      --white:     #ffffff;
+      --muted:     #888888;
+      --faint:     #2a2a2c;
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(14,14,15,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .nav-logo-text span { color: var(--burn); }
+
+    nav a.nav-link {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a.nav-link:hover { color: var(--white); }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .doc-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .doc-eyebrow svg {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .doc-eyebrow span {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--burn);
+    }
+
+    .doc-title {
+      font-family: var(--font-head);
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .doc-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .doc-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .doc-meta-item svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.5;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--bg2);
+      border: 1px solid var(--faint);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+
+    .toc-title {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+    }
+
+    .toc li {
+      counter-increment: toc;
+      margin-bottom: 8px;
+    }
+
+    .toc li::before {
+      content: counter(toc) ".";
+      color: var(--burn);
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 10px;
+      min-width: 20px;
+      display: inline-block;
+    }
+
+    .toc a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover { color: var(--burn); }
+
+    /* ── CONTENT ── */
+    .doc-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 100px;
+    }
+
+    .section-number {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burn);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-family: var(--font-head);
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .doc-section p {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+    }
+
+    /* ── TAGS ── */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .tag {
+      padding: 5px 14px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,87,34,0.3);
+      background: rgba(255,87,34,0.07);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--burn);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* ── DATA TABLE ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--faint);
+    }
+
+    .data-table th {
+      background: var(--bg3);
+      padding: 14px 20px;
+      text-align: left;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .data-table td {
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      border-top: 1px solid var(--faint);
+      vertical-align: top;
+    }
+
+    .data-table td:first-child {
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: var(--bg2);
+      border: 1px solid var(--faint);
+      border-left: 3px solid var(--burn);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .info-box-title {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .info-box p {
+      font-size: 14px !important;
+      margin-bottom: 0 !important;
+    }
+
+    .info-box a {
+      color: var(--burn);
+      text-decoration: none;
+    }
+
+    .info-box a:hover { color: var(--burn-lt); }
+
+    /* ── THIRD PARTY TABLE ── */
+    .party-table {
+      background: var(--bg2);
+      border: 1px solid var(--faint);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+
+    .party-row {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .party-row:last-child { border-bottom: none; }
+
+    .party-name {
+      padding: 20px 24px;
+      font-weight: 600;
+      font-size: 15px;
+      min-width: 180px;
+      border-right: 1px solid var(--faint);
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .party-desc {
+      padding: 20px 24px;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      flex: 1;
+    }
+
+    .party-desc a {
+      color: var(--burn);
+      text-decoration: none;
+      font-size: 12px;
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* ── ACTION TAGS ── */
+    .action-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .action-tag {
+      padding: 7px 16px;
+      border-radius: 6px;
+      background: var(--bg3);
+      border: 1px solid var(--faint);
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── CONTACT BOX ── */
+    .contact-box {
+      background: var(--bg2);
+      border: 1px solid var(--faint);
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .contact-box h4 {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-box .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px !important;
+    }
+
+    .contact-box .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--burn);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .contact-box .email-link:hover { color: var(--burn-lt); }
+
+    .contact-box .response-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 16px !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--faint);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-left strong {
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-right a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--white); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .page-wrap { padding: 48px 20px 80px; }
+      .doc-title { font-size: 48px; }
+      .party-row { flex-direction: column; }
+      .party-name { min-width: unset; border-right: none; border-bottom: 1px solid var(--faint); padding-bottom: 12px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+        <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111111"/>
+        <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
+        <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
+        <defs><clipPath id="n2-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
+        <g clip-path="url(#n2-face)">
+          <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
+          <path d="M172 852 C228 672 180 556 296 470 C340 534 364 510 408 446 C444 510 456 470 480 390 C504 470 516 510 552 446 C596 510 620 534 664 470 C780 556 732 672 788 852Z" fill="#BF2E00"/>
+          <path d="M336 852 C368 744 356 660 408 616 C428 664 444 644 480 608 C516 644 532 664 552 616 C604 660 592 744 624 852Z" fill="#FF9A5C"/>
+          <path d="M440 852 C452 784 448 740 480 706 C512 740 508 784 520 852Z" fill="#FFF0C0" opacity="0.9"/>
+        </g>
+        <rect x="476" y="96" width="96" height="44" rx="14" fill="#2A2A2C"/>
+        <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
+        <line x1="512" y1="114" x2="512" y2="158" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="910" y1="512" x2="866" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="114" y1="512" x2="158" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
+        <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+        <circle cx="512" cy="512" r="40" fill="#FF5722"/>
+        <circle cx="512" cy="512" r="20" fill="white"/>
+      </svg>
+      <span class="nav-logo-text"><span>Burn</span>Clock</span>
+    </a>
+    <a class="nav-link" href="index.html">← Back to App</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="doc-header">
+      <div class="doc-eyebrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+          <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111"/>
+          <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
+          <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
+          <defs><clipPath id="h2-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
+          <g clip-path="url(#h2-face)">
+            <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
+            <path d="M172 852 C228 672 180 556 296 470 C340 534 364 510 408 446 C444 510 456 470 480 390 C504 470 516 510 552 446 C596 510 620 534 664 470 C780 556 732 672 788 852Z" fill="#BF2E00"/>
+            <path d="M336 852 C368 744 356 660 408 616 C428 664 444 644 480 608 C516 644 532 664 552 616 C604 660 592 744 624 852Z" fill="#FF9A5C"/>
+          </g>
+          <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
+          <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
+          <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+          <circle cx="512" cy="512" r="40" fill="#FF5722"/>
+          <circle cx="512" cy="512" r="20" fill="white"/>
+        </svg>
+        <span>BurnClock</span>
+      </div>
+
+      <h1 class="doc-title">Privacy<br>Policy</h1>
+
+      <div class="doc-meta">
+        <div class="doc-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Effective May 17, 2026
+        </div>
+        <div class="doc-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Last updated May 17, 2026
+        </div>
+        <div class="doc-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          iOS &amp; Android
+        </div>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc">
+        <div class="toc-title">Contents</div>
+        <ol>
+          <li><a href="#who-we-are">Who we are</a></li>
+          <li><a href="#what-we-collect">What data we collect</a></li>
+          <li><a href="#how-we-use">How we use your data</a></li>
+          <li><a href="#data-sharing">Data sharing &amp; third parties</a></li>
+          <li><a href="#retention">Data retention &amp; deletion</a></li>
+          <li><a href="#childrens">Children's privacy</a></li>
+          <li><a href="#your-rights">Your rights</a></li>
+          <li><a href="#changes">Changes to this policy</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ol>
+      </div>
+    </header>
+
+    <!-- SECTION 1 -->
+    <section class="doc-section" id="who-we-are">
+      <div class="section-number">Section #1</div>
+      <h2 class="section-heading">Who we are</h2>
+      <p>BurnClock is a workout interval timer application for iOS and Android, developed and operated by FriendsLog LLC ("we", "us", or "our"). This Privacy Policy explains how we collect, use, and protect information when you use BurnClock.</p>
+      <p>By using BurnClock, you agree to the practices described in this policy. If you do not agree, please discontinue use of the app.</p>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="doc-section" id="what-we-collect">
+      <div class="section-number">Section #2</div>
+      <h2 class="section-heading">What data we collect</h2>
+      <p>BurnClock is designed to respect your privacy. Here is a plain-language breakdown of what we do and do not collect.</p>
+
+      <div class="tag-row">
+        <span class="tag">No account required</span>
+        <span class="tag">No email address</span>
+        <span class="tag">No payment data</span>
+        <span class="tag">No location data</span>
+        <span class="tag">No contacts or microphone (beyond voice cues)</span>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data type</th>
+            <th>What it includes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Crash reports</td>
+            <td>Automatically collected via Firebase Crashlytics when the app crashes. Includes device model, OS version, and a stack trace. Not linked to your identity.</td>
+          </tr>
+          <tr>
+            <td>Performance data</td>
+            <td>Anonymous app performance metrics (startup times, screen load times) collected via Firebase Performance Monitoring.</td>
+          </tr>
+          <tr>
+            <td>Usage analytics</td>
+            <td>Aggregated, anonymous events such as which screens are visited and which features are used, collected via Firebase Analytics. No personal identifiers are attached.</td>
+          </tr>
+          <tr>
+            <td>Workout data</td>
+            <td>Workout timers and configurations you create are stored locally on your device only. We cannot access this data.</td>
+          </tr>
+          <tr>
+            <td>Voice cue audio</td>
+            <td>Voice countdown cues are generated and played on-device using the system's text-to-speech engine. No audio is recorded or transmitted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="doc-section" id="how-we-use">
+      <div class="section-number">Section #3</div>
+      <h2 class="section-heading">How we use your data</h2>
+      <p>The limited data we collect is used solely to:</p>
+
+      <div class="action-tags">
+        <span class="action-tag">Diagnose and fix crashes</span>
+        <span class="action-tag">Improve app performance</span>
+        <span class="action-tag">Understand which features matter</span>
+      </div>
+
+      <p>We never sell your data, use it for advertising, or share it with any party for marketing purposes.</p>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="doc-section" id="data-sharing">
+      <div class="section-number">Section #4</div>
+      <h2 class="section-heading">Data sharing &amp; third parties</h2>
+      <p>We use the following third-party services, each operating under their own privacy policy:</p>
+
+      <div class="party-table">
+        <div class="party-row">
+          <div class="party-name">Firebase (Google)</div>
+          <div class="party-desc">
+            Provides Crashlytics, Performance Monitoring, and Analytics. Data is processed by Google LLC under their data processing terms.
+            <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a>
+          </div>
+        </div>
+        <div class="party-row">
+          <div class="party-name">Apple / Google</div>
+          <div class="party-desc">
+            App distribution via App Store and Google Play. These platforms may collect their own telemetry per their respective privacy policies.
+          </div>
+        </div>
+      </div>
+
+      <p>We do not sell, rent, or trade your information to any third party. We may disclose data if required by law or to protect rights and safety.</p>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="doc-section" id="retention">
+      <div class="section-number">Section #5</div>
+      <h2 class="section-heading">Data retention &amp; deletion</h2>
+      <p>Crash logs and analytics data are retained for up to 90 days within Firebase, after which they are automatically deleted. Workout data lives entirely on your device — deleting the app removes it permanently.</p>
+      <p>To request deletion of any crash or analytics data associated with your device's anonymous identifier, contact us at burnclock@friendslog.net and we will submit a deletion request to Firebase on your behalf.</p>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section class="doc-section" id="childrens">
+      <div class="section-number">Section #6</div>
+      <h2 class="section-heading">Children's privacy</h2>
+      <p>BurnClock is rated 4+ on the App Store and Everyone on Google Play. The app does not knowingly collect personal information from children under 13 (or under 16 where required by local law). Because we collect no personal identifiers, the app is safe for all ages.</p>
+      <p>If you believe we have inadvertently received personal data from a child, contact us at burnclock@friendslog.net immediately.</p>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section class="doc-section" id="your-rights">
+      <div class="section-number">Section #7</div>
+      <h2 class="section-heading">Your rights</h2>
+      <p>Depending on your location, you may have rights under GDPR, CCPA, or similar laws. Because BurnClock collects no personal identifiers, most of these rights are satisfied by default. You may still:</p>
+
+      <div class="action-tags">
+        <span class="action-tag">Request data deletion</span>
+        <span class="action-tag">Opt out of analytics (disable in iOS/Android settings)</span>
+        <span class="action-tag">Contact us with privacy questions</span>
+      </div>
+
+      <div class="info-box">
+        <div class="info-box-title">California residents</div>
+        <p>BurnClock does not sell personal information as defined by the CCPA. No opt-out mechanism is required.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section class="doc-section" id="changes">
+      <div class="section-number">Section #8</div>
+      <h2 class="section-heading">Changes to this policy</h2>
+      <p>We may update this Privacy Policy as the app evolves. Material changes will be communicated via an in-app notice or an update to the "Last updated" date above. Continued use of BurnClock after changes take effect constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section class="doc-section" id="contact">
+      <div class="section-number">Section #9</div>
+      <h2 class="section-heading">Contact us</h2>
+      <p>For any privacy-related questions or requests:</p>
+
+      <div class="contact-box">
+        <h4>BurnClock — Privacy Inquiries</h4>
+        <p class="subtitle">FriendsLog LLC</p>
+        <a class="email-link" href="mailto:burnclock@friendslog.net">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          burnclock@friendslog.net
+        </a>
+        <p class="response-note">We aim to respond to all privacy requests within <strong style="color:rgba(255,255,255,0.5)">30 days</strong>.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      © 2026 <strong>FriendsLog LLC</strong> · All rights reserved
+    </div>
+    <div class="footer-right">
+      <a href="mailto:burnclock@friendslog.net">burnclock@friendslog.net</a>
+      <a href="index.html">← Back to App</a>
+    </div>
+  </footer>
+
+</body>
+</html>

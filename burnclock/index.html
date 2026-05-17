@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BurnClock — Workout Timer</title>
+  <meta name="description" content="BurnClock is a no-account workout interval timer for iOS and Android. Build custom workouts, hear voice cues, and train smarter." />
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0e0e0f;
+      --bg2:       #151516;
+      --bg3:       #1c1c1e;
+      --burn:      #FF5722;
+      --burn-lt:   #FF8C42;
+      --burn-dim:  rgba(255,87,34,0.15);
+      --white:     #ffffff;
+      --muted:     #888888;
+      --faint:     #333336;
+      --radius:    16px;
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(14,14,15,0.95), transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .nav-logo-text span { color: var(--burn); }
+
+    nav a.nav-link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a.nav-link:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    /* Ambient glow background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(255,87,34,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+      50%       { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+    }
+
+    /* Centered container for icon + label */
+    .icon-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    /* The icon wrapper */
+    .icon-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      flex-shrink: 0;
+      margin-bottom: 16px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* Glow */
+    .icon-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 40px;
+      box-shadow: 0 0 60px 20px rgba(255, 87, 34, 0.45);
+      animation: glow-pulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.7; }
+      50%       { opacity: 1; }
+    }
+
+    .icon-wrap svg {
+      width: 180px;
+      height: 180px;
+      border-radius: 40px;
+      display: block;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--burn);
+      margin: 0;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.4s;
+    }
+
+    .hero-title .burn { color: var(--burn); }
+
+    .hero-subtitle-line {
+      font-family: var(--font-head);
+      font-size: clamp(13px, 2vw, 16px);
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.6s;
+    }
+
+    .hero-desc {
+      max-width: 480px;
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 0.8s;
+    }
+
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 1s;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: all 0.25s ease;
+      border: 1.5px solid transparent;
+    }
+
+    .store-btn.primary {
+      background: var(--burn);
+      color: var(--white);
+    }
+
+    .store-btn.primary:hover {
+      background: var(--burn-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255,87,34,0.35);
+    }
+
+    .store-btn.secondary {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--faint);
+    }
+
+    .store-btn.secondary:hover {
+      border-color: var(--burn);
+      color: var(--burn);
+      transform: translateY(-2px);
+    }
+
+    .store-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .coming-soon-note {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 20px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      display: block;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards 1.1s;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--burn);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 64px;
+      line-height: 1.05;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .feature-card:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .feature-card:last-child  { border-radius: 0 var(--radius) var(--radius) 0; }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--burn), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover { background: var(--bg3); }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      color: var(--burn);
+    }
+
+    .feature-name {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      border-top: 1px solid var(--faint);
+      border-bottom: 1px solid var(--faint);
+      padding: 60px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--burn);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── PRIVACY TEASER ── */
+    .privacy-strip {
+      max-width: 700px;
+      margin: 100px auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .privacy-strip p {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .privacy-strip .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .tag {
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--faint);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .privacy-link {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--burn);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,87,34,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .privacy-link:hover {
+      color: var(--burn-lt);
+      border-color: var(--burn-lt);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--faint);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-left strong {
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-right a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--white); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+
+      .hero::before { width: 340px; height: 340px; animation: none; }
+
+      .icon-wrap { width: 140px; height: 140px; animation: none; }
+      .icon-wrap svg { width: 140px; height: 140px; border-radius: 32px; }
+      .icon-glow { border-radius: 32px; }
+
+      .features-grid { grid-template-columns: 1fr; gap: 2px; }
+      .feature-card:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+      .feature-card:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
+      .feature-card { padding: 36px 28px; }
+
+      .stats-strip { gap: 40px; }
+
+      footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="width:32px;height:32px;border-radius:8px;flex-shrink:0;">
+        <defs><clipPath id="nav-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
+        <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111111"/>
+        <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
+        <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
+        <circle cx="512" cy="512" r="378" fill="none" stroke="#FF8C42" stroke-width="4" opacity="0.3"/>
+        <g clip-path="url(#nav-face)">
+          <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
+          <path d="M 204 852 C 260 672 212 556 328 470 C 372 534 396 510 440 446 C 476 510 488 470 512 390 C 536 470 548 510 584 446 C 628 510 652 534 696 470 C 812 556 764 672 820 852 Z" fill="#BF2E00"/>
+          <path d="M 252 852 C 304 700 260 584 356 516 C 392 578 412 554 456 498 C 484 556 496 520 512 462 C 528 520 540 556 568 498 C 612 554 632 578 668 516 C 764 584 720 700 772 852 Z" fill="#E04418"/>
+          <path d="M 312 852 C 356 724 336 620 400 568 C 428 624 444 600 480 562 C 492 606 500 584 512 548 C 524 584 532 606 544 562 C 580 600 596 624 624 568 C 688 620 668 724 712 852 Z" fill="#FF6030"/>
+          <path d="M 368 852 C 400 744 388 660 440 616 C 460 664 476 644 512 608 C 548 644 564 664 584 616 C 636 660 624 744 656 852 Z" fill="#FF9A5C"/>
+          <path d="M 424 852 C 444 764 436 700 476 660 C 488 700 496 678 512 646 C 528 678 536 700 548 660 C 588 700 580 764 600 852 Z" fill="#FFD166"/>
+          <path d="M 472 852 C 484 784 480 740 512 706 C 544 740 540 784 552 852 Z" fill="#FFF0C0" opacity="0.9"/>
+        </g>
+        <rect x="476" y="96" width="96" height="44" rx="14" fill="#2A2A2C"/>
+        <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
+        <line x1="512" y1="114" x2="512" y2="158" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="910" y1="512" x2="866" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="512" y1="910" x2="512" y2="866" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="114" y1="512" x2="158" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+        <line x1="796" y1="196" x2="766" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="880" y1="336" x2="848" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="880" y1="688" x2="848" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="228" y1="196" x2="258" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="144" y1="336" x2="176" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="144" y1="688" x2="176" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+        <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
+        <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+        <circle cx="512" cy="512" r="40" fill="#FF5722"/>
+        <circle cx="512" cy="512" r="20" fill="white"/>
+      </svg>
+      <span class="nav-logo-text"><span>Burn</span>Clock</span>
+    </a>
+    <a class="nav-link" href="privacy.html">Privacy Policy</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="icon-block">
+      <div class="icon-wrap">
+        <div class="icon-glow"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+          <defs><clipPath id="hero-face"><circle cx="512" cy="512" r="340"/></clipPath></defs>
+          <rect x="0" y="0" width="1024" height="1024" rx="224" fill="#111111"/>
+          <circle cx="512" cy="512" r="400" fill="#1C1C1E"/>
+          <circle cx="512" cy="512" r="400" fill="none" stroke="#FF5722" stroke-width="18"/>
+          <circle cx="512" cy="512" r="378" fill="none" stroke="#FF8C42" stroke-width="4" opacity="0.3"/>
+          <g clip-path="url(#hero-face)">
+            <rect x="172" y="580" width="680" height="272" fill="#5C1200"/>
+            <path d="M 204 852 C 260 672 212 556 328 470 C 372 534 396 510 440 446 C 476 510 488 470 512 390 C 536 470 548 510 584 446 C 628 510 652 534 696 470 C 812 556 764 672 820 852 Z" fill="#BF2E00"/>
+            <path d="M 252 852 C 304 700 260 584 356 516 C 392 578 412 554 456 498 C 484 556 496 520 512 462 C 528 520 540 556 568 498 C 612 554 632 578 668 516 C 764 584 720 700 772 852 Z" fill="#E04418"/>
+            <path d="M 312 852 C 356 724 336 620 400 568 C 428 624 444 600 480 562 C 492 606 500 584 512 548 C 524 584 532 606 544 562 C 580 600 596 624 624 568 C 688 620 668 724 712 852 Z" fill="#FF6030"/>
+            <path d="M 368 852 C 400 744 388 660 440 616 C 460 664 476 644 512 608 C 548 644 564 664 584 616 C 636 660 624 744 656 852 Z" fill="#FF9A5C"/>
+            <path d="M 424 852 C 444 764 436 700 476 660 C 488 700 496 678 512 646 C 528 678 536 700 548 660 C 588 700 580 764 600 852 Z" fill="#FFD166"/>
+            <path d="M 472 852 C 484 784 480 740 512 706 C 544 740 540 784 552 852 Z" fill="#FFF0C0" opacity="0.9"/>
+          </g>
+          <rect x="476" y="96" width="96" height="44" rx="14" fill="#2A2A2C"/>
+          <rect x="488" y="58" width="72" height="44" rx="12" fill="#FF5722"/>
+          <line x1="512" y1="114" x2="512" y2="158" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+          <line x1="910" y1="512" x2="866" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+          <line x1="512" y1="910" x2="512" y2="866" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+          <line x1="114" y1="512" x2="158" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+          <line x1="796" y1="196" x2="766" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="880" y1="336" x2="848" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="880" y1="688" x2="848" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="228" y1="196" x2="258" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="144" y1="336" x2="176" y2="352" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="144" y1="688" x2="176" y2="672" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+          <line x1="512" y1="512" x2="512" y2="190" stroke="white" stroke-width="20" stroke-linecap="round"/>
+          <line x1="512" y1="512" x2="706" y2="624" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+          <circle cx="512" cy="512" r="40" fill="#FF5722"/>
+          <circle cx="512" cy="512" r="20" fill="white"/>
+        </svg>
+      </div>
+      <p class="hero-eyebrow">iOS &amp; Android</p>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="burn">Burn</span>Clock
+    </h1>
+
+    <p class="hero-subtitle-line">Workout Timer</p>
+
+    <p class="hero-desc">
+      Build custom interval workouts in seconds. Voice cues keep you in the zone. No account, no subscriptions, no distractions — just you and the clock.
+    </p>
+
+    <div class="store-buttons">
+      <a href="#" class="store-btn primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a href="#" class="store-btn secondary">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 20.5v-17c0-.83 1-.83 1.5-.5l14 8.5c.5.28.5 1 0 1.28L4.5 21c-.5.33-1.5.33-1.5-.5z"/></svg>
+        Google Play
+      </a>
+    </div>
+    <p class="coming-soon-note">Coming soon to both stores</p>
+
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <p class="section-label reveal">Built for focus</p>
+    <h2 class="section-title reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M9 9h6M9 13h4"/>
+          <circle cx="17" cy="17" r="3" fill="currentColor" stroke="none"/>
+          <path d="M17 15.5v1.5l1 1" stroke="white" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        <h3 class="feature-name">Build Any Workout</h3>
+        <p class="feature-desc">Design custom interval sequences with work phases, rest phases, and as many rounds as you need. Save and reuse them instantly.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        <h3 class="feature-name">Voice Cues</h3>
+        <p class="feature-desc">Hear countdowns and phase transitions out loud. Keep your eyes on your form, not the screen. Audio generated on-device — nothing recorded.</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <h3 class="feature-name">No Account Required</h3>
+        <p class="feature-desc">Open the app and go. Your workouts live on your device. No sign-up, no email, no data shared with us or anyone else.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat reveal">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Accounts required</div>
+    </div>
+    <div class="stat reveal reveal-delay-1">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Subscriptions</div>
+    </div>
+    <div class="stat reveal reveal-delay-2">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Custom workouts</div>
+    </div>
+    <div class="stat reveal reveal-delay-3">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">Age rating</div>
+    </div>
+  </div>
+
+  <!-- PRIVACY TEASER -->
+  <div class="privacy-strip">
+    <p class="section-label reveal">Privacy</p>
+    <h2 class="section-title reveal reveal-delay-1" style="font-size: clamp(28px,4vw,42px); margin-bottom: 24px;">We don't collect<br>what we don't need.</h2>
+    <p class="reveal reveal-delay-2">BurnClock collects only anonymous crash and performance data to keep the app running smoothly. No personal identifiers, no location, no contacts.</p>
+    <div class="tags reveal reveal-delay-2">
+      <span class="tag">No account required</span>
+      <span class="tag">No email address</span>
+      <span class="tag">No location data</span>
+      <span class="tag">No payment data</span>
+      <span class="tag">No contacts or microphone</span>
+    </div>
+    <a class="privacy-link reveal reveal-delay-3" href="privacy.html">Read the full Privacy Policy →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      © 2026 <strong>FriendsLog LLC</strong> · All rights reserved
+    </div>
+    <div class="footer-right">
+      <a href="mailto:burnclock@friendslog.net">burnclock@friendslog.net</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
