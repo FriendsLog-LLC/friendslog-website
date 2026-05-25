@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["WF3WY54L56.net.friendslog.burnclock"],
+        "components": [
+          {
+            "/": "/burnclock/import.html",
+            "?": { "w": "?*" },
+            "comment": "BurnClock workout import deep link"
+          }
+        ]
+      }
+    ]
+  }
+}

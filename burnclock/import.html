@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Import Workout — BurnClock</title>
+  <meta name="description" content="Open this workout in the BurnClock app." />
+  <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .import-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+    }
+    .import-card {
+      max-width: 460px;
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--faint);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .import-icon {
+      font-size: 56px;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .import-card h1 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 36px;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .import-card p {
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .import-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: var(--burn);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.3px;
+      transition: background 0.15s;
+    }
+    .import-btn:hover { background: var(--burn-lt); }
+    .import-alt {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--burn);
+      text-decoration: none;
+      border: 2px solid var(--burn);
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .import-note {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="import-wrap">
+    <div class="import-card">
+      <div class="import-icon">🔥</div>
+      <h1>Open in BurnClock</h1>
+      <p>Tap below to import this workout into the BurnClock app.</p>
+      <a id="openApp" class="import-btn" href="#">Open in BurnClock</a>
+      <br />
+      <a class="import-alt" href="/burnclock/">Get BurnClock</a>
+      <p class="import-note">
+        If the app is installed, this link should open it automatically.
+        Otherwise, install BurnClock and tap the original link again.
+      </p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var qs = window.location.search || '';
+      var legacy = 'burnclock://import' + qs;
+      document.getElementById('openApp').href = legacy;
+      // When AASA is in place and the app is installed, iOS opens the app
+      // before this page loads. If we're here, either the app isn't installed
+      // or the user reached this page from Safari (which doesn't auto-open
+      // universal links). Try the custom scheme as a fallback.
+      setTimeout(function () { window.location.href = legacy; }, 250);
+    })();
+  </script>
+</body>
+</html>
