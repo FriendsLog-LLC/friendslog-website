@@ -203,6 +203,11 @@ nav {
   padding: 4px 12px;
 }
 
+.badge--live {
+  color: var(--black);
+  border-color: var(--black);
+}
+
 /* ── MORE COMING ── */
 .more-coming {
   max-width: 960px;
