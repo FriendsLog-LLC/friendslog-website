@@ -25,6 +25,9 @@
 
 html { scroll-behavior: smooth; }
 
+/* links like #grownups land below the sticky nav */
+section[id] { scroll-margin-top: 80px; }
+
 body {
   background: var(--bg);
   color: var(--ink);
