@@ -410,7 +410,7 @@
         </div>
         <div class="doc-meta-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Last updated May 17, 2026
+          Last updated November 10, 2026
         </div>
         <div class="doc-meta-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
@@ -482,6 +482,14 @@
             <td>Workout timers and configurations you create are stored locally on your device only. We cannot access this data.</td>
           </tr>
           <tr>
+            <td>Apple Health (optional, iOS)</td>
+            <td>If you allow it, BurnClock saves each completed workout (activity type, start and end time) to Apple Health on your device. On iOS 26 and later, running a Health workout session is also what keeps voice and beep cues playing while your phone is locked. BurnClock does not read any Health data. Health data never leaves your device, is never sent to FriendsLog or any third party, and is never used for advertising, marketing or analytics. You can turn this off in BurnClock → Settings → Apple Health, or in the Health app.</td>
+          </tr>
+          <tr>
+            <td>Official workouts list</td>
+            <td>BurnClock downloads the list of official workouts and programs (such as Couch to 5K) from friendslog.net. No personal information is sent; like any web request, the hosting provider sees your IP address to deliver the files.</td>
+          </tr>
+          <tr>
             <td>Voice cue audio</td>
             <td>Voice countdown cues are generated and played on-device using the system's text-to-speech engine. No audio is recorded or transmitted.</td>
           </tr>
@@ -519,6 +527,13 @@
           </div>
         </div>
         <div class="party-row">
+          <div class="party-name">GitHub Pages</div>
+          <div class="party-desc">
+            Hosts friendslog.net, including the official workouts list the app downloads. GitHub may log IP addresses for security and operations under its own privacy statement.
+            <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub privacy statement</a>
+          </div>
+        </div>
+        <div class="party-row">
           <div class="party-name">Apple / Google</div>
           <div class="party-desc">
             App distribution via App Store and Google Play. These platforms may collect their own telemetry per their respective privacy policies.
@@ -540,7 +555,7 @@
     <section class="doc-section" id="retention">
       <div class="section-number">Section #5</div>
       <h2 class="section-heading">Data retention &amp; deletion</h2>
-      <p>Crash logs and analytics data are retained for up to 90 days within Firebase, after which they are automatically deleted. Workout data lives entirely on your device — deleting the app removes it permanently.</p>
+      <p>Crash logs and analytics data are retained for up to 90 days within Firebase, after which they are automatically deleted. Workout data and weekly plans live entirely on your device. You can delete them in BurnClock → Settings → Your data, and deleting the app removes them permanently. Workouts saved to Apple Health can be deleted in the Health app.</p>
       <p>To request deletion of any crash or analytics data associated with your device's anonymous identifier, contact us at burnclock@friendslog.net and we will submit a deletion request to Firebase on your behalf.</p>
     </section>
 
