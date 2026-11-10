@@ -1,0 +1,35 @@
+{
+  "v": 1,
+  "plan": {
+    "name": "Couch to 5K · Week 9",
+    "days": {
+      "mon": [
+        0
+      ],
+      "wed": [
+        0
+      ],
+      "fri": [
+        0
+      ]
+    },
+    "workouts": [
+      {
+        "name": "Couch to 5K · Week 9",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 1800,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": true
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "v": 1,
+  "plan": {
+    "name": "Couch to 5K · Week 2",
+    "days": {
+      "mon": [
+        0
+      ],
+      "wed": [
+        0
+      ],
+      "fri": [
+        0
+      ]
+    },
+    "workouts": [
+      {
+        "name": "Couch to 5K · Week 2",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 90,
+            "restTime": 120,
+            "repeat": 5,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": false
+          },
+          {
+            "type": "set",
+            "description": "Final run",
+            "workTime": 90,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": false
+          }
+        ]
+      }
+    ]
+  }
+}

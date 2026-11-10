@@ -1,0 +1,65 @@
+{
+  "v": 1,
+  "plan": {
+    "name": "Couch to 5K · Week 4",
+    "days": {
+      "mon": [
+        0
+      ],
+      "wed": [
+        0
+      ],
+      "fri": [
+        0
+      ]
+    },
+    "workouts": [
+      {
+        "name": "Couch to 5K · Week 4",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 180,
+            "restTime": 90,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": false
+          },
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 300,
+            "restTime": 150,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": true
+          },
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 180,
+            "restTime": 90,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": false
+          },
+          {
+            "type": "set",
+            "description": "Final run",
+            "workTime": 300,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": true
+          }
+        ]
+      }
+    ]
+  }
+}

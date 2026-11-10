@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "workout": {
+    "id": "official-tabata-4",
+    "name": "Tabata — 4 min",
+    "warmupTime": 120,
+    "cooldownTime": 60,
+    "sets": [
+      {
+        "id": "official-tabata-4-1",
+        "type": "set",
+        "description": "Tabata",
+        "workTime": 20,
+        "restTime": 10,
+        "repeat": 8,
+        "announceName": false,
+        "announceGetReady": false
+      }
+    ],
+    "createdAt": 0,
+    "updatedAt": 0
+  }
+}

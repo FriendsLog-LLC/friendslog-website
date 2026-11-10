@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "workout": {
+    "id": "official-emom-10",
+    "name": "EMOM — 10 min",
+    "warmupTime": 120,
+    "cooldownTime": 60,
+    "sets": [
+      {
+        "id": "official-emom-10-1",
+        "type": "set",
+        "description": "Round",
+        "workTime": 60,
+        "restTime": 0,
+        "repeat": 10,
+        "announceGetReady": false
+      }
+    ],
+    "createdAt": 0,
+    "updatedAt": 0
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "workout": {
+    "id": "official-hiit-20",
+    "name": "HIIT — 20 min",
+    "warmupTime": 180,
+    "cooldownTime": 120,
+    "sets": [
+      {
+        "id": "official-hiit-20-1",
+        "type": "set",
+        "description": "Work",
+        "workTime": 40,
+        "restTime": 20,
+        "repeat": 15,
+        "announceName": false
+      }
+    ],
+    "createdAt": 0,
+    "updatedAt": 0
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "v": 1,
+  "updatedAt": "2026-11-10",
+  "sections": [
+    {
+      "id": "couch-to-5k",
+      "title": "Couch to 5K",
+      "description": "A 9-week plan that takes you from no running to 30 minutes non-stop. Three runs a week, each with a 5-minute warm-up walk and a 5-minute cool-down walk. Add one week at a time; each becomes a weekly plan with runs on Monday, Wednesday and Friday. Repeat any week whenever you need to.",
+      "credit": {
+        "text": "Based on the NHS Couch to 5K plan",
+        "url": "https://www.nhs.uk/better-health/get-active/get-running-with-couch-to-5k/"
+      },
+      "items": [
+        {
+          "id": "c25k-week-1",
+          "kind": "plan",
+          "title": "Week 1",
+          "summary": "Run 1 min, walk 1½ min ×7, then a final 1-min run",
+          "minutes": 29,
+          "file": "couch-to-5k-week-1.json"
+        },
+        {
+          "id": "c25k-week-2",
+          "kind": "plan",
+          "title": "Week 2",
+          "summary": "Run 1½ min, walk 2 min ×5, then a final 1½-min run",
+          "minutes": 29,
+          "file": "couch-to-5k-week-2.json"
+        },
+        {
+          "id": "c25k-week-3",
+          "kind": "plan",
+          "title": "Week 3",
+          "summary": "Runs of 1½ and 3 minutes with walks between",
+          "minutes": 25,
+          "file": "couch-to-5k-week-3.json"
+        },
+        {
+          "id": "c25k-week-4",
+          "kind": "plan",
+          "title": "Week 4",
+          "summary": "Runs of 3 and 5 minutes with walks between",
+          "minutes": 32,
+          "file": "couch-to-5k-week-4.json"
+        },
+        {
+          "id": "c25k-week-5",
+          "kind": "plan",
+          "title": "Week 5",
+          "summary": "Three different runs, ending with 20 minutes non-stop",
+          "minutes": 31,
+          "file": "couch-to-5k-week-5.json"
+        },
+        {
+          "id": "c25k-week-6",
+          "kind": "plan",
+          "title": "Week 6",
+          "summary": "Three different runs, ending with 25 minutes non-stop",
+          "minutes": 35,
+          "file": "couch-to-5k-week-6.json"
+        },
+        {
+          "id": "c25k-week-7",
+          "kind": "plan",
+          "title": "Week 7",
+          "summary": "Run 25 minutes",
+          "minutes": 35,
+          "file": "couch-to-5k-week-7.json"
+        },
+        {
+          "id": "c25k-week-8",
+          "kind": "plan",
+          "title": "Week 8",
+          "summary": "Run 28 minutes",
+          "minutes": 38,
+          "file": "couch-to-5k-week-8.json"
+        },
+        {
+          "id": "c25k-week-9",
+          "kind": "plan",
+          "title": "Week 9",
+          "summary": "Run 30 minutes — about 5K",
+          "minutes": 40,
+          "file": "couch-to-5k-week-9.json"
+        }
+      ]
+    },
+    {
+      "id": "quick",
+      "title": "Quick workouts",
+      "items": [
+        {
+          "id": "tabata-4",
+          "kind": "workout",
+          "title": "Tabata — 4 minutes",
+          "summary": "20 s all-out, 10 s rest ×8, with a short warm-up",
+          "minutes": 7,
+          "file": "tabata-4.json"
+        },
+        {
+          "id": "hiit-20",
+          "kind": "workout",
+          "title": "HIIT — 20 minutes",
+          "summary": "40 s on, 20 s off ×15 between a warm-up and cool-down",
+          "minutes": 20,
+          "file": "hiit-20.json"
+        },
+        {
+          "id": "emom-10",
+          "kind": "workout",
+          "title": "EMOM — 10 minutes",
+          "summary": "Every minute on the minute: 10 rounds of 1 minute",
+          "minutes": 13,
+          "file": "emom-10.json"
+        }
+      ]
+    }
+  ]
+}

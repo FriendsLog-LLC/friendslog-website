@@ -1,0 +1,97 @@
+{
+  "v": 1,
+  "plan": {
+    "name": "Couch to 5K · Week 6",
+    "days": {
+      "mon": [
+        0
+      ],
+      "wed": [
+        1
+      ],
+      "fri": [
+        2
+      ]
+    },
+    "workouts": [
+      {
+        "name": "Couch to 5K · Week 6, Run 1",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 300,
+            "restTime": 180,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": true
+          },
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 480,
+            "restTime": 180,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": true
+          },
+          {
+            "type": "set",
+            "description": "Final run",
+            "workTime": 300,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": true
+          }
+        ]
+      },
+      {
+        "name": "Couch to 5K · Week 6, Run 2",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 600,
+            "restTime": 180,
+            "repeat": 1,
+            "restLabel": "Walk",
+            "announceGetReady": true,
+            "announceHalfway": true
+          },
+          {
+            "type": "set",
+            "description": "Final run",
+            "workTime": 600,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": true
+          }
+        ]
+      },
+      {
+        "name": "Couch to 5K · Week 6, Run 3",
+        "warmupTime": 300,
+        "cooldownTime": 300,
+        "sets": [
+          {
+            "type": "set",
+            "description": "Run",
+            "workTime": 1500,
+            "restTime": 0,
+            "repeat": 1,
+            "announceGetReady": true,
+            "announceHalfway": true
+          }
+        ]
+      }
+    ]
+  }
+}
