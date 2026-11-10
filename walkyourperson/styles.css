@@ -1,0 +1,87 @@
+/* Walk Your Person — friendslog.net/walkyourperson/
+   Fonts are served from this folder (no Google Fonts), so the pages load nothing from other sites. */
+@font-face { font-family: 'Chewy'; src: url('fonts/chewy-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Nunito'; src: url('fonts/nunito-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Nunito'; src: url('fonts/nunito-latin-800-normal.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #fff6fa;
+  --bg2:     #ffffff;
+  --pink:    #ff4f8b;
+  --pink-lt: #ffd3e6;
+  --blue:    #3fb8ff;
+  --purple:  #9b6bff;
+  --green:   #78d68c;
+  --sun:     #ffd650;
+  --ink:     #3a2350;
+  --muted:   #7a6a86;
+  --line:    #f1dce7;
+  --radius:  22px;
+  --font-head: 'Chewy', 'Comic Sans MS', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--pink); }
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 246, 250, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { width: 36px; height: 36px; border-radius: 9px; }
+.nav-logo-text { font-family: var(--font-head); font-size: 24px; color: var(--ink); letter-spacing: 0.01em; }
+.nav-logo-text span { color: var(--pink); }
+
+.nav-links { display: flex; gap: 24px; }
+.nav-links a {
+  font-size: 14px; font-weight: 800; color: var(--muted); text-decoration: none;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.nav-links a:hover { color: var(--pink); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+footer strong { color: var(--ink); font-weight: 800; }
+.footer-right { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-right a { color: var(--muted); text-decoration: none; }
+.footer-right a:hover { color: var(--pink); }
+
+@media (max-width: 640px) {
+  nav { padding: 14px 18px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 12px; }
+  footer { padding: 28px 20px; }
+}
